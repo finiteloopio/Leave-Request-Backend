@@ -4,11 +4,11 @@ import pool from "../db.js";
 export const getMyBalances = async (req, res) => {
   const userId = req.user.id;
   try {
-    // THE FIX: Select all 5 balance columns from the "Employee" table
+    // THE FIX: Select balance columns from the "employee" table (lowercase), alias to match frontend expectations
     const query = `
-      SELECT "EarnedLeave", "SickLeave", "PersonalLeave", "VacationLeave", "WFHBalance"
-      FROM "Employee"
-      WHERE "EmployeeID" = $1;
+      SELECT earnedleave as "EarnedLeave", sickleave as "SickLeave", personalleave as "PersonalLeave", vacationleave as "VacationLeave", 0 as "WFHBalance"
+      FROM employee
+      WHERE employeeid = $1;
     `;
     const result = await pool.query(query, [userId]);
 
@@ -58,8 +58,7 @@ export const updateEmployeeBalance = async (req, res) => {
     earnedLeave === undefined ||
     sickLeave === undefined ||
     personalLeave === undefined ||
-    vacationLeave === undefined ||
-    wfhBalance === undefined
+    vacationLeave === undefined 
   ) {
     return res
       .status(400)
@@ -87,8 +86,8 @@ export const updateEmployeeBalance = async (req, res) => {
         "SickLeave" = $2,
         "PersonalLeave" = $3,
         "VacationLeave" = $4,
-        "WFHBalance" = $5
-      WHERE "EmployeeID" = $6;
+        
+      WHERE "EmployeeID" = $5;
     `;
     await client.query(updateQuery, [
       earnedLeave,
