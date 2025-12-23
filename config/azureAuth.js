@@ -10,7 +10,9 @@ const azureConfig = {
   clientSecret: process.env.AZURE_CLIENT_SECRET,
   responseType: "code",
   responseMode: "form_post",
-  redirectUrl: "http://localhost:5001/api/auth/login/microsoft/callback",
+  redirectUrl: 
+  "https://leave-request-backend-ju8h.onrender.com/api/auth/login/microsoft/callback"
+,
   
   allowHttpForRedirectUrl: true,
   scope: ["openid", "profile", "email", "User.Read"],
