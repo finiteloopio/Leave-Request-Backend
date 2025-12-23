@@ -8,6 +8,7 @@ import db from "./db.js"; // PostgreSQL connection
 
 // --- Route Imports ---
 import authRoutes from "./routes/auth.routes.js";
+import balanceRoutes from "./routes/balance.routes.js";
 import holidayRoutes from "./routes/holiday.routes.js";
 import leaveRoutes from "./routes/leave.routes.js";
 import userRoutes from "./routes/user.routes.js";
@@ -72,6 +73,7 @@ app.get("/", (req, res) => res.send("✅ HR Backend is running!"));
 
 // --- Modular API Routes ---
 app.use("/api/auth", authRoutes);
+app.use("/api/balances", balanceRoutes);
 app.use("/api/holidays", holidayRoutes);
 app.use("/api/leave/delete", deleteLeaveRoutes);
 // Add these with your other routes

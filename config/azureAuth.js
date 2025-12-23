@@ -11,6 +11,7 @@ const azureConfig = {
   responseType: "code",
   responseMode: "form_post",
   redirectUrl: "http://localhost:5001/api/auth/login/microsoft/callback",
+  
   allowHttpForRedirectUrl: true,
   scope: ["openid", "profile", "email", "User.Read"],
   passReqToCallback: false,
